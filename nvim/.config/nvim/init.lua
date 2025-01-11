@@ -24,10 +24,10 @@ vim.g.maplocalleader = "\\"
 -- Options
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.shiftwidth = 2
+vim.o.shiftwidth = 4
 vim.o.smarttab = true
 vim.o.scrolloff = 10
-vim.o.tabstop = 2
+vim.o.tabstop = 4
 -- Mappings
 
 -- Setup lazy.nvim
@@ -115,7 +115,18 @@ require("lazy").setup({
 			branch = "0.1.x",
 			dependencies = {
 				"nvim-lua/plenary.nvim"
-			}
+			},
+			config = function()
+				local wk = require('which-key')
+				wk.add({
+					{ '<leader>t',  group = 'telescope' },
+					{ '<leader>tf', desc = 'find files', mode = 'n' },
+					{ '<leader>tl', desc = 'live grep',  mode = 'n' },
+				})
+
+				vim.keymap.set('n', '<leader>tf', require('telescope.builtin').find_files)
+				vim.keymap.set('n', '<leader>tl', require('telescope.builtin').live_grep)
+			end
 		},
 		{
 			"folke/noice.nvim",
@@ -128,6 +139,24 @@ require("lazy").setup({
 				"rcarriga/nvim-notify",
 			},
 			opts = {},
+		},
+		{
+			"nvim-tree/nvim-tree.lua",
+			version = "*",
+			lazy = false,
+			dependencies = {
+				"nvim-tree/nvim-web-devicons",
+			},
+			config = function()
+				require("nvim-tree").setup {}
+			end
+		},
+		{
+			"folke/which-key.nvim",
+			event = "VeryLazy",
+			opts = {
+				preset = 'helix',
+			},
 		}
 	},
 	-- Configure any other settings here. See the documentation for more details.
