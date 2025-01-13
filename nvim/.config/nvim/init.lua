@@ -28,6 +28,7 @@ vim.o.shiftwidth = 4
 vim.o.smarttab = true
 vim.o.scrolloff = 10
 vim.o.tabstop = 4
+vim.o.autowrite = true
 -- Mappings
 
 -- Setup lazy.nvim
@@ -148,7 +149,23 @@ require("lazy").setup({
 				"nvim-tree/nvim-web-devicons",
 			},
 			config = function()
-				require("nvim-tree").setup {}
+				local function my_on_attach(bufnr)
+					local api = require("nvim-tree.api")
+
+					api.config.mappings.default_on_attach(bufnr)
+
+					local wk = require('which-key')
+					wk.add({
+						{ '<leader>d', group = 'nvim-tree', icon = '❐' },
+						{ '<leader>dt', desc = 'toggle side tree' }
+					})
+
+					vim.keymap.set("n", "<leader>dt", api.tree.toggle)
+				end
+
+				require("nvim-tree").setup({
+					on_attach = my_on_attach,
+				})
 			end
 		},
 		{
