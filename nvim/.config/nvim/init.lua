@@ -28,7 +28,9 @@ vim.o.shiftwidth = 4
 vim.o.smarttab = true
 vim.o.scrolloff = 10
 vim.o.tabstop = 4
-vim.o.autowrite = true
+vim.o.hidden = true
+vim.o.clipboard = 'unnamed'
+
 -- Mappings
 
 -- Setup lazy.nvim
@@ -105,7 +107,7 @@ require("lazy").setup({
 				local configs = require("nvim-treesitter.configs")
 
 				configs.setup({
-					ensure_installed = { "lua", "go" },
+					ensure_installed = { "lua", "go", "python" },
 					highlight = { enable = true },
 					indent = { enable = true },
 				})
@@ -174,6 +176,14 @@ require("lazy").setup({
 			opts = {
 				preset = 'helix',
 			},
+		},
+		{
+			"akinsho/toggleterm.nvim",
+			version = "*",
+			opts = {
+				open_mapping = [[<c-\>]],
+				direction = 'float'
+			}
 		}
 	},
 	-- Configure any other settings here. See the documentation for more details.
