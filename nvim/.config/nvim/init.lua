@@ -65,7 +65,7 @@ require("lazy").setup({
 			"williamboman/mason-lspconfig.nvim",
 			opts = function()
 				require("mason-lspconfig").setup({
-					ensure_installed = { "lua_ls" },
+					ensure_installed = { "lua_ls", "pyright" },
 				})
 
 				require("mason-lspconfig").setup_handlers {
