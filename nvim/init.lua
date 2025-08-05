@@ -54,6 +54,18 @@ require("lazy").setup({
 			{ "mason-org/mason.nvim", opts = {} },
 			"neovim/nvim-lspconfig",
 		},
+	},
+	{
+		'nvim-telescope/telescope.nvim', tag = '0.1.8',
+		dependencies = { 'nvim-lua/plenary.nvim' },
+	},
+	{
+		'akinsho/toggleterm.nvim',
+		version = "*",
+		opts = {
+			open_mapping = [[<c-\>]],
+			direction = 'float'
+		}
 	}
   },
   -- Configure any other settings here. See the documentation for more details.
