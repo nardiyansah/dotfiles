@@ -84,6 +84,8 @@ require("lazy").setup({
 -- telescope
 local telebuiltin = require('telescope.builtin')
 
+vim.keymap.set('n', '<leader>t', ':Telescope<Enter>', { desc = 'Telescope' })
+
 -- find files
 vim.keymap.set('n', '<leader>ff', telebuiltin.find_files, { desc = '[F]ind [F]iles' })
 -- grep text in files
