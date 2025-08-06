@@ -66,6 +66,11 @@ require("lazy").setup({
 			open_mapping = [[<c-\>]],
 			direction = 'float'
 		}
+	},
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		opts = {}
 	}
   },
   -- Configure any other settings here. See the documentation for more details.
