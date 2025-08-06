@@ -81,6 +81,28 @@ require("lazy").setup({
 })
 
 -- ### KEYMAPS ###
+-- telescope
+local telebuiltin = require('telescope.builtin')
+
+-- find files
+vim.keymap.set('n', '<leader>ff', telebuiltin.find_files, { desc = '[F]ind [F]iles' })
+-- grep text in files
+vim.keymap.set('n', '<leader>fg', telebuiltin.live_grep, { desc = '[F]ind by [Grep]' })
+-- search in current buffer
+vim.keymap.set('n', '<leader>fb', telebuiltin.current_buffer_fuzzy_find, { desc = '[F]ind in [B]uffer' })
+-- search recent files
+vim.keymap.set('n', '<leader>fr', telebuiltin.oldfiles, { desc = '[F]ind [R]ecent files' })
+
+-- Go to definition (lists definitions in Telescope)
+vim.keymap.set('n', 'gd', telebuiltin.lsp_definitions, { desc = '[G]oto [D]efinition' })
+-- Find references
+vim.keymap.set('n', 'gr', telebuiltin.lsp_references, { desc = '[G]oto [R]eferences' })
+-- List implementations (for interfaces)
+vim.keymap.set('n', 'gi', telebuiltin.lsp_implementations, { desc = '[G]oto [I]mplementation' })
+-- LSP diagnostics (errors/warnings)
+vim.keymap.set('n', '<leader>fd', telebuiltin.diagnostics, { desc = '[F]ind [D]iagnostics' })
+-- LSP symbols (e.g., functions, classes)
+vim.keymap.set('n', '<leader>fs', telebuiltin.lsp_document_symbols, { desc = '[F]ind [S]ymbols' })
 
 -- ### AUTOCOMMANDS ###
 
