@@ -71,6 +71,12 @@ require("lazy").setup({
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		opts = {}
+	},
+	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {}
 	}
   },
   -- Configure any other settings here. See the documentation for more details.
@@ -105,6 +111,12 @@ vim.keymap.set('n', 'gi', telebuiltin.lsp_implementations, { desc = '[G]oto [I]m
 vim.keymap.set('n', '<leader>fd', telebuiltin.diagnostics, { desc = '[F]ind [D]iagnostics' })
 -- LSP symbols (e.g., functions, classes)
 vim.keymap.set('n', '<leader>fs', telebuiltin.lsp_document_symbols, { desc = '[F]ind [S]ymbols' })
+
+-- harpoon
+local harpoon = require('harpoon')
+
+vim.keymap.set('n', '<leader>h', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = 'Harpoon' })
+vim.keymap.set('n', '<leader>a', function() harpoon:list():add() end, { desc = 'Harpoon add' })
 
 -- ### AUTOCOMMANDS ###
 
