@@ -87,6 +87,8 @@ require("lazy").setup({
 })
 
 -- ### KEYMAPS ###
+-- netrw
+vim.keymap.set('n', '<leader>e', ':Explore<Enter>', { desc = 'Netrw Explorer' })
 -- telescope
 local telebuiltin = require('telescope.builtin')
 
@@ -118,6 +120,9 @@ local harpoon = require('harpoon')
 vim.keymap.set('n', '<leader>h', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = 'Harpoon' })
 vim.keymap.set('n', '<leader>a', function() harpoon:list():add() end, { desc = 'Harpoon add' })
 
+-- diagnostic
+vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = 'Show diagnostic [L]ine message' })
+
 -- ### AUTOCOMMANDS ###
 
 -- ### OPTIONS ###
@@ -127,3 +132,6 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.scrolloff = 8
+
+-- diagnostic
+vim.diagnostic.config({ float = { border = 'rounded' } })
