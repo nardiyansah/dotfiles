@@ -121,7 +121,7 @@ vim.keymap.set('n', '<leader>h', function() harpoon.ui:toggle_quick_menu(harpoon
 vim.keymap.set('n', '<leader>a', function() harpoon:list():add() end, { desc = 'Harpoon add' })
 
 -- diagnostic
-vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = 'Show diagnostic [L]ine message' })
+vim.keymap.set('n', 'sd', vim.diagnostic.open_float, { desc = '[S]how [D]iagnostic in Line' })
 
 -- ### AUTOCOMMANDS ###
 
@@ -135,3 +135,6 @@ vim.opt.scrolloff = 8
 
 -- diagnostic
 vim.diagnostic.config({ float = { border = 'rounded' } })
+
+-- netrw
+vim.g.netrw_liststyle = 3
