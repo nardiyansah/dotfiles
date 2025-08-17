@@ -56,8 +56,14 @@ require("lazy").setup({
 		},
 	},
 	{
-		'nvim-telescope/telescope.nvim', tag = '0.1.8',
+		'nvim-telescope/telescope.nvim',
+		tag = '0.1.8',
 		dependencies = { 'nvim-lua/plenary.nvim' },
+		config = function()
+			require('telescope').setup{
+				defaults = require('telescope.themes').get_dropdown()
+			}
+		end
 	},
 	{
 		'akinsho/toggleterm.nvim',
@@ -121,7 +127,7 @@ vim.keymap.set('n', '<leader>h', function() harpoon.ui:toggle_quick_menu(harpoon
 vim.keymap.set('n', '<leader>a', function() harpoon:list():add() end, { desc = 'Harpoon add' })
 
 -- diagnostic
-vim.keymap.set('n', 'sd', vim.diagnostic.open_float, { desc = '[S]how [D]iagnostic in Line' })
+vim.keymap.set('n', '<leader>sd', vim.diagnostic.open_float, { desc = '[S]how [D]iagnostic in Line' })
 
 -- ### AUTOCOMMANDS ###
 
