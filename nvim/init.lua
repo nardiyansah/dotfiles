@@ -59,11 +59,6 @@ require("lazy").setup({
 		'nvim-telescope/telescope.nvim',
 		tag = '0.1.8',
 		dependencies = { 'nvim-lua/plenary.nvim' },
-		config = function()
-			require('telescope').setup{
-				defaults = require('telescope.themes').get_dropdown()
-			}
-		end
 	},
 	{
 		'akinsho/toggleterm.nvim',
@@ -85,14 +80,16 @@ require("lazy").setup({
 		opts = {}
 	}
   },
-  -- Configure any other settings here. See the documentation for more details.
-  -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { "habamax" } },
   -- automatically check for plugin updates
   checker = { enabled = true },
 })
 
 -- ### KEYMAPS ###
+-- remove some keymaps because I don't like it. see lsp-defaults
+vim.keymap.del('n','grn')
+vim.keymap.del('n','grr')
+vim.keymap.del('n','gra')
+vim.keymap.del('n','gri')
 -- netrw
 vim.keymap.set('n', '<leader>e', ':Explore<Enter>', { desc = 'Netrw Explorer' })
 -- telescope
