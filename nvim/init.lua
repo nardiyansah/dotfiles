@@ -85,6 +85,10 @@ require("lazy").setup({
 })
 
 -- ### KEYMAPS ###
+-- for jump backward and forward
+vim.keymap.set('n', '<D-[>', '<C-o>', { desc = 'Jump Backward' })
+vim.keymap.set('n', '<D-]>', '<C-i>', { desc = 'Jump Forward' })
+
 -- remove some keymaps because I don't like it. see lsp-defaults
 vim.keymap.del('n','grn')
 vim.keymap.del('n','grr')
