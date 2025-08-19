@@ -160,4 +160,4 @@ vim.diagnostic.config({ float = { border = 'rounded' } })
 vim.g.netrw_liststyle = 3
 
 -- select option for autocompletion
-vim.cmd("set completeopt+=fuzzy,noselect")
+vim.cmd("set completeopt+=fuzzy,noinsert")
