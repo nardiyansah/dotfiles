@@ -85,6 +85,9 @@ require("lazy").setup({
 })
 
 -- ### KEYMAPS ###
+-- trigger omni autocomplete
+vim.keymap.set('i', '<C-Space>', '<C-x><C-o>', { desc = 'Autocomplete' })
+
 -- for jump backward and forward
 vim.keymap.set('n', '<D-[>', '<C-o>', { desc = 'Jump Backward' })
 vim.keymap.set('n', '<D-]>', '<C-i>', { desc = 'Jump Forward' })
@@ -104,9 +107,9 @@ vim.keymap.set('n', '<leader>t', ':Telescope<Enter>', { desc = 'Telescope' })
 -- find files
 vim.keymap.set('n', '<leader>ff', telebuiltin.find_files, { desc = '[F]ind [F]iles' })
 -- grep text in files
-vim.keymap.set('n', '<leader>fg', telebuiltin.live_grep, { desc = '[F]ind by [Grep]' })
+vim.keymap.set('n', '<D-S-f>', telebuiltin.live_grep, { desc = 'Find grep' })
 -- search in current buffer
-vim.keymap.set('n', '<leader>fb', telebuiltin.current_buffer_fuzzy_find, { desc = '[F]ind in [B]uffer' })
+vim.keymap.set('n', '<D-f>', telebuiltin.current_buffer_fuzzy_find, { desc = 'Find in current buffer' })
 -- search recent files
 vim.keymap.set('n', '<leader>fr', telebuiltin.oldfiles, { desc = '[F]ind [R]ecent files' })
 
@@ -131,6 +134,15 @@ vim.keymap.set('n', '<leader>a', function() harpoon:list():add() end, { desc = '
 vim.keymap.set('n', '<leader>sd', vim.diagnostic.open_float, { desc = '[S]how [D]iagnostic in Line' })
 
 -- ### AUTOCOMMANDS ###
+-- autocompletion
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if client:supports_method('textDocument/completion') then
+      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+    end
+  end,
+})
 
 -- ### OPTIONS ###
 vim.opt.number = true
@@ -139,9 +151,13 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.scrolloff = 8
+vim.opt.winborder = 'rounded'
 
 -- diagnostic
 vim.diagnostic.config({ float = { border = 'rounded' } })
 
 -- netrw
 vim.g.netrw_liststyle = 3
+
+-- select option for autocompletion
+vim.cmd("set completeopt+=fuzzy,noselect")
