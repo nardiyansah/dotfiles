@@ -78,11 +78,33 @@ require("lazy").setup({
 		branch = "harpoon2",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {}
+	},
+	{
+		'nvim-lualine/lualine.nvim',
+		dependencies = { 'nvim-tree/nvim-web-devicons' },
+		opts = {}
+	},
+	{
+		'nvim-treesitter/nvim-treesitter',
+	    lazy = false,
+		branch = 'master',
+		build = ':TSUpdate',
+	},
+	{
+	  "craftzdog/solarized-osaka.nvim",
+	  lazy = false,
+	  priority = 1000,
+	  opts = {},
 	}
   },
   -- automatically check for plugin updates
   checker = { enabled = true },
 })
+
+require 'nvim-treesitter.configs'.setup {
+	ensure_installed = { 'lua', 'go' },
+	highlight = { enable = true }
+}
 
 -- ### KEYMAPS ###
 -- trigger omni autocomplete
@@ -161,3 +183,7 @@ vim.g.netrw_liststyle = 3
 
 -- select option for autocompletion
 vim.cmd("set completeopt+=fuzzy,noinsert")
+
+-- colorscheme
+vim.cmd[[colorscheme solarized-osaka]]
+
