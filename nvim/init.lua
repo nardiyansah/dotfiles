@@ -170,6 +170,7 @@ vim.keymap.set('n', '<leader>sd', vim.diagnostic.open_float, { desc = '[S]how [D
 -- bookmarks
 vim.keymap.set({'v','n'}, '<leader>mm', '<cmd>BookmarksMark<cr>', { desc = 'Mark Add' })
 vim.keymap.set({'v','n'}, '<leader>ml', '<cmd>BookmarksGoto<cr>', { desc = 'Mark List' })
+vim.keymap.set({'v','n'}, '<leader>md', function() require('bookmarks.commands').delete_mark_of_current_file() end, { desc = 'Mark Clear' })
 
 -- ### AUTOCOMMANDS ###
 -- autocompletion
