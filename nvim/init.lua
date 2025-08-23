@@ -91,11 +91,23 @@ require("lazy").setup({
 		build = ':TSUpdate',
 	},
 	{
-	  "craftzdog/solarized-osaka.nvim",
-	  lazy = false,
-	  priority = 1000,
-	  opts = {},
-	}
+		"LintaoAmons/bookmarks.nvim",
+		tag = "3.2.0",
+		dependencies = {
+			 {"kkharji/sqlite.lua"},
+			 {"nvim-telescope/telescope.nvim"},
+			 {
+				 "ahmedkhalf/project.nvim",
+				 config = function()
+					 require("project_nvim").setup{}
+				 end
+			 }
+		 },
+		 config = function()
+			 local opts = {}
+			 require("bookmarks").setup(opts)
+		 end
+	 }
   },
   -- automatically check for plugin updates
   checker = { enabled = true },
@@ -155,6 +167,10 @@ vim.keymap.set('n', '<leader>a', function() harpoon:list():add() end, { desc = '
 -- diagnostic
 vim.keymap.set('n', '<leader>sd', vim.diagnostic.open_float, { desc = '[S]how [D]iagnostic in Line' })
 
+-- bookmarks
+vim.keymap.set({'v','n'}, '<leader>mm', '<cmd>BookmarksMark<cr>', { desc = 'Mark Add' })
+vim.keymap.set({'v','n'}, '<leader>ml', '<cmd>BookmarksGoto<cr>', { desc = 'Mark List' })
+
 -- ### AUTOCOMMANDS ###
 -- autocompletion
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -164,6 +180,35 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
     end
   end,
+})
+
+vim.api.nvim_create_autocmd({ "VimEnter", "BufEnter" }, {
+	group = vim.api.nvim_create_augroup("BookmarksGroup", {}),
+    pattern = { "*" },
+	callback = function()
+	  local project_root = require("project_nvim.project").get_project_root()
+	  if not project_root then
+		return
+	  end
+
+	  local project_name = string.gsub(project_root, "^" .. os.getenv("HOME") .. "/", "")
+	  local Service = require("bookmarks.domain.service")
+	  local Repo = require("bookmarks.domain.repo")
+	  local bookmark_list = nil
+
+	  for _, bl in ipairs(Repo.find_lists()) do
+		if bl.name == project_name then
+		  bookmark_list = bl
+		  break
+		end
+	  end
+
+	  if not bookmark_list then
+		bookmark_list = Service.create_list(project_name)
+	  end
+	  Service.set_active_list(bookmark_list.id)
+	  require("bookmarks.sign").safe_refresh_signs()
+	end
 })
 
 -- ### OPTIONS ###
@@ -185,5 +230,5 @@ vim.g.netrw_liststyle = 3
 vim.cmd("set completeopt+=fuzzy,noinsert")
 
 -- colorscheme
-vim.cmd[[colorscheme solarized-osaka]]
+vim.cmd[[colorscheme habamax]]
 
