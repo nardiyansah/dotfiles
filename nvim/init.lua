@@ -107,6 +107,11 @@ require("lazy").setup({
 			 local opts = {}
 			 require("bookmarks").setup(opts)
 		 end
+	 },
+	 {
+		 'stevearc/oil.nvim',
+		 opts = {},
+		 lazy = false,
 	 }
   },
   -- automatically check for plugin updates
@@ -132,7 +137,7 @@ vim.keymap.del('n','grr')
 vim.keymap.del('n','gra')
 vim.keymap.del('n','gri')
 -- netrw
-vim.keymap.set('n', '<leader>e', ':Explore<Enter>', { desc = 'Netrw Explorer' })
+vim.keymap.set('n', '<leader>e', ':Oil<Enter>', { desc = 'Oil Explorer' })
 -- telescope
 local telebuiltin = require('telescope.builtin')
 
