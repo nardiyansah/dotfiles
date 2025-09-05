@@ -116,6 +116,11 @@ require("lazy").setup({
 			 view_options = { show_hidden = true }
 		 },
 		 lazy = false,
+	 },
+	 {
+		 'folke/noice.nvim',
+		 event = 'VeryLazy',
+		 opts = {}
 	 }
   },
   -- automatically check for plugin updates
