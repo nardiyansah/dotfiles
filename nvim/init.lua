@@ -50,7 +50,7 @@ require("lazy").setup({
     {
 		"mason-org/mason-lspconfig.nvim",
 		opts = {
-			ensure_installed = { 'gopls', 'lua-language-server' },
+			ensure_installed = { 'gopls', 'lua_ls' },
 		},
 		dependencies = {
 			{ "mason-org/mason.nvim", opts = {} },
